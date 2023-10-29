@@ -1,0 +1,4 @@
+emb_model_name_or_path: "sentence-transformers/all-MiniLM-L6-v2"
+pdf_folder: "data"
+llm_model_name_or_path: "models/llama-2-7b-chat.ggmlv3.q8_0.bin"
+model_type: "llama"
