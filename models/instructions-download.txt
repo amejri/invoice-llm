@@ -1,0 +1,1 @@
+!wget https://huggingface.co/TheBloke/LLaMA2-13B-Tiefighter-GGUF/resolve/main/llama2-13b-tiefighter.Q8_0.gguf
