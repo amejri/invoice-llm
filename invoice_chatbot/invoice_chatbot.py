@@ -3,13 +3,13 @@ from langchain.document_loaders import PyPDFDirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.llms import CTransformers
-from utils import set_qa_prompt
+from invoice_chatbot.utils import set_qa_prompt
 from langchain.chains import RetrievalQA
 
 
 
 class InvoiceChatBot:
-    def __init__(self, emb_model_name_or_path: str, llm_model_name_or_path: str, model_type: str, max_new_tokens: int = 256, temperature: float = 0, device: str = "cpu") -> None:
+    def __init__(self, pdf_folder: str, emb_model_name_or_path: str, llm_model_name_or_path: str, model_type: str, max_new_tokens: int = 256, temperature: float = 0, device: str = "cpu") -> None:
         self.embeddings = HuggingFaceEmbeddings(model_name=emb_model_name_or_path,
                                             model_kwargs={'device': device})        
         self.llm = CTransformers(model=llm_model_name_or_path,
@@ -17,7 +17,8 @@ class InvoiceChatBot:
                             config={'max_new_tokens': max_new_tokens,
                                     'temperature': temperature}
                             )
-    
+        self.pdf_folder = pdf_folder
+
     def __vectorize_data(self) -> None:
         loader = PyPDFDirectoryLoader(self.pdf_folder)
         docs = loader.load()
